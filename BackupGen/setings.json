@@ -1,0 +1,8 @@
+{
+  "sourceFolders" : [
+    "C:\\Programming\\backupgen\\source1",
+    "C:\\Programming\\backupgen\\source2"
+  ],
+  "destinationFolder" : "C:\\Programming\\backupgen\\dest",
+  "loggingLevel" : "Error"
+}
