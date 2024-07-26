@@ -1,16 +1,22 @@
-using System.Globalization;
+using BackupGen.Settings;
 
-namespace BackupGen.Loger;
+namespace BackupGen.Log;
 
 public static class Logger
 {
     private static StreamWriter _logFile;
+    private static LoggingLevel _loggingLevel;
 
     static Logger()
     {
         Directory.CreateDirectory("logs");
         _logFile = File.CreateText(@"logs\logfile-" + DateTime.Now.ToString("dd.MM.yyyy Thh.mm.ss") + ".txt");
         _logFile.WriteLine("Log file for " + DateTime.Now);
+    }
+
+    public static void SetLoggingLevel(LoggingLevel loggingLevel)
+    {
+        _loggingLevel = loggingLevel;
     }
     
     public static void LogError(string message)

@@ -4,16 +4,19 @@ namespace BackupGen;
 
 public class BackupGenerator
 {
-    private SetingsOptions _settingsOptions;
+    private SettingsOptions _settingsOptions;
+    private string _backupFolderName;
 
-    public BackupGenerator(SetingsOptions settingsOptions)
+    public BackupGenerator(SettingsOptions settingsOptions)
     {
         _settingsOptions = settingsOptions;
+        _backupFolderName = "backup-" + DateTime.Now.ToString("dd.MM.yyyy Thh.mm.ss");
     }
 
     public void CopyFiles()
     {
-        foreach (var folder in _settingsOptions.sourceFolders)
+        Directory.CreateDirectory(_settingsOptions.DestinationFolder + @"\" + _backupFolderName);
+        foreach (var folder in _settingsOptions.SourceFolders)
         {
             if (Directory.Exists(folder))
             {
@@ -34,6 +37,6 @@ public class BackupGenerator
     private void CopyFile(string filePath)
     {
         string fileName = filePath.Split(@"\").Last();
+        File.Copy(filePath, _settingsOptions.DestinationFolder + @"\" + _backupFolderName + @"\" + fileName);
     }
-
 }
