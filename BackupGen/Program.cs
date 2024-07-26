@@ -6,7 +6,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        SetingsFile setingsFile = new SetingsFile("setings.json");
-        SetingsOptions setingsOptions = setingsFile.GetOptions();
+        SettingsFile settingsFile = new SettingsFile("settings.json");
+        SettingsOptions settingsOptions = settingsFile.GetOptions();
     }
 }

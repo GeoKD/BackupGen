@@ -11,4 +11,8 @@
       <Folder Include="Loger\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="bin\Debug\net8.0\settings.json" />
+    </ItemGroup>
+
 </Project>
