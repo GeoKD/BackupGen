@@ -25,6 +25,15 @@ public class BackupGenerator
     private void CopyFolder(string folderPath)
     {
         string[] files = Directory.GetFiles(folderPath);
+        foreach (var file in files)
+        {
+            CopyFile(file);
+        }
+    }
+
+    private void CopyFile(string filePath)
+    {
+        string fileName = filePath.Split(@"\").Last();
     }
 
 }

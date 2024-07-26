@@ -8,5 +8,8 @@ class Program
     {
         SetingsFile setingsFile = new SetingsFile("setings.json");
         SetingsOptions setingsOptions = setingsFile.GetOptions();
+
+        BackupGenerator backupGenerator = new BackupGenerator(setingsOptions);
+        backupGenerator.CopyFiles();
     }
 }
