@@ -6,7 +6,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        SettingsFile settingsFile = new SettingsFile("settings.json");
-        SettingsOptions settingsOptions = settingsFile.GetOptions();
+        SetingsFile setingsFile = new SetingsFile("setings.json");
+        SetingsOptions setingsOptions = setingsFile.GetOptions();
+
+        BackupGenerator backupGenerator = new BackupGenerator(setingsOptions);
+        backupGenerator.CopyFiles();
     }
 }
