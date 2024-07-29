@@ -1,4 +1,5 @@
 using System.Text.Json;
+using BackupGen.Log;
 
 namespace BackupGen.Settings;
 
@@ -8,21 +9,42 @@ public class SettingsFile
 
     public SettingsFile(string filePath)
     {
-        try
-        {
-            TryReadFile(filePath);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
+
+        string settingsFile = ReadFile(filePath);
+        _settingsOptions = DeserializeFile(settingsFile);
     }
 
-    private void TryReadFile(string filePath)
+    private string ReadFile(string filePath)
     {
         using StreamReader streamReader = new StreamReader(filePath);
-        string stream = streamReader.ReadToEnd();
-        _settingsOptions = JsonSerializer.Deserialize<SettingsOptions>(stream);
+        return streamReader.ReadToEnd();
+    }
+
+    private SettingsOptions DeserializeFile(string file)
+    {
+        SettingsOptions? settingsOptions = JsonSerializer.Deserialize<SettingsOptions>(file);
+
+        CheckSettingsOptions(settingsOptions);
+
+        return settingsOptions;
+    }
+
+    private void CheckSettingsOptions(SettingsOptions? settingsOptions)
+    {
+        if (settingsOptions == null)
+        {
+            throw new Exception("Deserialization result is null");
+        }
+        
+        if (settingsOptions.SourceFolders == null)
+        {
+            throw new ArgumentException("Can't find source folders");
+        }
+        
+        if (settingsOptions.DestinationFolder == null)
+        {
+            throw new ArgumentException("Can't find destination folder");
+        }
     }
 
     public SettingsOptions GetOptions()
