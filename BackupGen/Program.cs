@@ -11,11 +11,13 @@ class Program
         {
             SettingsFile settingsFile = new SettingsFile("settings.json");
             SettingsOptions settingsOptions = settingsFile.GetOptions();
-        
+            
             Logger.SetLoggingLevel(settingsOptions.LoggingLevel);
             
             BackupGenerator backupGenerator = new BackupGenerator(settingsOptions);
             backupGenerator.CopyFiles();
+            
+            Console.WriteLine("Backups created!");
         }
         catch (Exception e)
         {

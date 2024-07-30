@@ -9,7 +9,6 @@ public class SettingsFile
 
     public SettingsFile(string filePath)
     {
-
         string settingsFile = ReadFile(filePath);
         _settingsOptions = DeserializeFile(settingsFile);
     }
